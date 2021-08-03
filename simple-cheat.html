@@ -1,0 +1,147 @@
+<html class="no-js" lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <!-- This site is optimized with the Yoast SEO plugin v16.4 - https://yoast.com/wordpress/plugins/seo/ -->
+    <title>Laravel Cheat Sheet - Simple Cheat Sheet for Laravel</title>
+    <style type="text/css">
+    .wp-block-preformatted {
+    padding: 1rem 3rem;
+    font-family: monospace;
+    line-height: 1.2;
+    overflow: auto;
+    padding: 1rem 3rem;
+    text-align: left;
+    margin: 2rem 0 2rem 1rem!important;
+    xwidth: calc(100% + 1rem)!important;
+    background: #312a2a;
+    color: #FFF;
+    }
+    .container {
+    overflow: none;
+    }
+    .__cf_email__ {
+    color:  #fff;
+    }
+    h2 {
+    font-size: 4em;
+    text-align: center;
+    }
+    h3 {
+    font-size: 2em;
+    }
+    body {
+    padding: 2em;
+    }
+    </style>
+  </head>
+  <body class="">
+    <div class="container grid js-toc-content">
+      <div class="crayons-article__main">
+        <div class="crayons-article__body text-styles spec__body" data-article-id="336794" id="article-body">
+          <h3>
+
+          <a name="eloquent-model" href="#eloquent-model" class="anchor">
+          </a>
+          Eloquent Model
+          </h3>
+          <p>Generating a new model<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>php artisan make:model BlogPost
+          </code></pre></div>
+          <p>Generating a new model with migration<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>php artisan make:model BlogPost --migration
+            // or
+            php artisan make:model BlogPost -m
+          </code></pre></div>
+          <p>By convention, Laravel assumes the table name is "snake case" plural model name. For example:</p>
+          <div class="table-wrapper-paragraph"><table>
+            <thead>
+              <tr>
+                <th>Model name</th>
+                <th>Table name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>BlogPost</td>
+                <td><code>blog_posts</code></td>
+              </tr>
+              <tr>
+                <td>Blogpost</td>
+                <td><code>blogposts</code></td>
+              </tr>
+              <tr>
+                <td>VeryLongTrain</td>
+                <td><code>very_long_trains</code></td>
+              </tr>
+            </tbody>
+          </table></div>
+          <p>To define a custom name, add (override) the protected <code>$table</code> model property<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>class BlogPost extends Model
+            {
+                protected $table = 'blogposts';
+            }
+          </code></pre></div>
+          <p>By default, all models are stored inside the <code>App</code> namespace, eg. <code>App\BlogPost</code></p>
+          <h4>
+          <a name="acessing-and-modifying-properties" href="#acessing-and-modifying-properties" class="anchor">
+          </a>
+          Acessing and modifying properties
+          </h4>
+          <p>You can read and modify model properties (row columns) using properties<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>$post = App\BlogPost::find(1);
+            $title = $post-&gt;title;
+            $content = $post-&gt;content;
+            $post-&gt;title = 'New title';
+            $post-&gt;content = 'New content';
+            // Always call save() to create the record and UPDATE the existing one
+            $post-&gt;save();
+          </code></pre></div>
+          <p>Property name corresponds 1:1 to the column name of the table</p>
+          <h3>
+          <a name="querying" href="#querying" class="anchor">
+          </a>
+          Querying
+          </h3>
+          <p>Retrieving all models as <em>collection</em><br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>$posts = App\BlogPost::all();
+          </code></pre></div>
+          <p>Retrieving single model by primary key (usually, by <code>id</code> property/column)<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>// Fetch BlogPost with id 10
+            $post = App\BlogPost::find(10);
+          </code></pre></div>
+          <p>Fetching <em>collection</em> of models by id<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>$posts = App\BlogPost::find([1, 2, 3]);
+          </code></pre></div>
+          <p>Collections are iterable (eg. using foreach)<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>$posts = App\BlogPost::all();
+            foreach ($posts as $post) {
+                echo $post-&gt;title;
+            }
+          </code></pre></div>
+          <p>Getting first element of the collection of models<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>$posts = App\BlogPost::all();
+            $post = $posts-&gt;first();
+          </code></pre></div>
+          <p>Creating and saving (creating a database row) a new model<br>
+          </p>
+          <div class="highlight"><pre class="wp-block-preformatted"><code>$post = new App\BlogPost();
+            $post-&gt;title = 'Title';
+            $post-&gt;content = 'Content';
+            $post-&gt;save();
+          </code></pre></div>
+          <p>Source: <a href="https://simplecheatsheet.com/tag/laravel-cheat-sheet/">Laravel Cheat Sheet</a></p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

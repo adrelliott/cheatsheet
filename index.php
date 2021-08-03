@@ -40,6 +40,7 @@
 			<div class="main-content">
 				<div class="archive-header-inner section-inner medium">
 					<h1 class="archive-title">Laravel Cheat Sheet</h1>
+					<a href="/simple-cheat.html">Open the simple version here</a>
 				</div>
 				</div><!-- .archive-header-inner -->
 				<!-- .archive-header -->
